@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div>
+    <div class="main-container">
         <h1>Storage Data</h1>
         <div class="container">
             <form action="">
@@ -23,6 +23,13 @@
                 </div>
                 <button type="submit" id="submit">Submit</button>
             </form>
+        </div>
+        <div class="container-search">
+            <input type="text" id="search1" placeholder="Search automatically by First Name or Last Name">
+            <div>
+                <input type="text" id="search2" placeholder="Search by First Name or Last Name">
+                <button id="searchBtn">Search</button>
+            </div>
         </div>
         <div class="table-container">
             <table border="1">
@@ -39,6 +46,7 @@
                 </tbody>
             </table>
         </div>
+        <p class="message" id="message"></p>
     </div>
 
 

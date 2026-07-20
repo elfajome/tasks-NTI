@@ -6,6 +6,10 @@ let emailInput = document.getElementById('email');
 let action = document.getElementById('action');
 let submitBtn = document.getElementById('submit');
 let dataTable = document.getElementById('data-table');
+let searchBtn = document.getElementById('searchBtn');
+let searchInput1 = document.getElementById('search1');
+let searchInput2 = document.getElementById('search2');
+let message = document.getElementById('message');
 
 let userData = JSON.parse(localStorage.getItem('userData')) || [];
 
@@ -41,6 +45,37 @@ submitBtn.addEventListener('click', function (e) {
     submitBtn.textContent = 'Submit';
 });
 
+// search by first name or last name
+searchBtn.addEventListener('click', function () {
+    let searchValue = searchInput2.value.toLowerCase();
+    let filteredData = userData.filter(function (user) {
+        return user.firstName.toLowerCase().includes(searchValue) || user.lastName.toLowerCase().includes(searchValue);
+    });
+
+    dataTable.innerHTML = '';
+
+    if (filteredData.length === 0) {
+        message.textContent = 'No results found.';
+    } else {
+        message.textContent = '';
+        filteredData.forEach(function (user) {
+            createRow(user.id, user.firstName, user.lastName, user.age, user.email);
+        });
+    }
+});
+
+// search automatically by first name or last name
+searchInput1.addEventListener('input', function () {
+    let searchValue = searchInput1.value.toLowerCase();
+    let filteredData = userData.filter(function (user) {
+        return user.firstName.toLowerCase().includes(searchValue) || user.lastName.toLowerCase().includes(searchValue);
+    });
+    dataTable.innerHTML = '';
+    filteredData.forEach(function (user) {
+        createRow(user.id, user.firstName, user.lastName, user.age, user.email);
+    });
+});
+
 function createRow(id, firstName, lastName, age, email) {
     let createRow = document.createElement('tr');
     let createFirstName = document.createElement('td');
@@ -59,7 +94,7 @@ function createRow(id, firstName, lastName, age, email) {
     createFirstName.textContent = firstName;
     createLastName.textContent = lastName;
     createAge.textContent = age;
-    createEmail.textContent = email;tqt
+    createEmail.textContent = email;
 
     createRow.appendChild(createFirstName);
     createRow.appendChild(createLastName);
@@ -90,6 +125,5 @@ function createRow(id, firstName, lastName, age, email) {
         submitBtn.textContent = 'Update';
     });
 
-    submitBtn.textContent = 'Submit';
-
 }
+
